@@ -1,0 +1,17 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}Regístro de usuario{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section class="p-4 w-50 bg-warning rounded mx-auto">
+        <header class="text-center mb-5">
+            <p class="h2">Blog</p>
+            <p class="h6">regístrate</p>
+        </header>
+
+        <form action="{% url 'register' %}" method="post" class="mt-2" autocomplete="off">
+            {% csrf_token %}
+            {{ form_register|crispy }}
+            <button type="submit" class="btn btn-secondary">Crear cuenta</button>
+        </form>
+    </section>
+{% endblock %}
