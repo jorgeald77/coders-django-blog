@@ -13,13 +13,43 @@
 </head>
 <body>
 
-{% include 'layouts/navigation.html' %}
+<div class="container mb-5">
+    <header class="blog-header lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
 
-<header></header>
+                <!-- TODO Realizar ventana modal para pedir correo electrónico -->
+                <a class="link-secondary" href="#">Suscríbete</a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" href="{% url 'home' %}">Blog</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
 
-<main>{% block content %}{% endblock %}</main>
+                <!-- TODO funcionalidad de busqueda en los Posts -->
+                <a class="link-secondary" href="#" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
+                         viewBox="0 0 24 24"><title>Search</title>
+                        <circle cx="10.5" cy="10.5" r="7.5"/>
+                        <path d="M21 21l-5.2-5.2"/>
+                    </svg>
+                </a>
 
-<footer>footer</footer>
+                <!-- TODO Enviar al formulario de registro de usuario -->
+                <a class="btn btn-sm btn-outline-secondary" href="#">Regístrate</a>
+            </div>
+        </div>
+    </header>
+</div>
+
+
+<main class="container">{% block content %}{% endblock %}</main>
+
+<footer class="blog-footer">
+    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.
+    </p>
+</footer>
 
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
