@@ -1,0 +1,17 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}Inicia sesión{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section class="p-4 w-50 bg-warning rounded mx-auto">
+        <header class="text-center mb-5">
+            <p class="h2">Blog</p>
+            <p class="h6">Inicia sesión</p>
+        </header>
+
+        <form action="{% url 'login' %}" method="post" class="mt-2" autocomplete="off">
+            {% csrf_token %}
+            {{ form_login|crispy }}
+            <button type="submit" class="btn btn-secondary">Entrar</button>
+        </form>
+    </section>
+{% endblock %}
