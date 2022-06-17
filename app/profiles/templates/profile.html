@@ -3,8 +3,22 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-    </form>
+    <section>
+        <header class="border d-flex mb-5 position-relative" style="height:150px; background-image: url('/media/images/bg-profile.jpeg')">
+            <div class="border">
+                <img src="" alt="foto de perfil" class="img-thumbnail rounded-circle w-100 h-100"/>
+            </div>
+            <p class="h5">username</p>
+
+            <div style="position: absolute; margin-right: 0;">
+                <a class="link-info" href="https://unsplash.com/es/fotos/IqZyFphHYbw?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink">Foto
+                    de Visax en Unsplash</a>
+            </div>
+        </header>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+        </form>
+    </section>
 {% endblock %}
