@@ -1,5 +1,10 @@
 {% extends 'layouts/layout.html' %}
 {% block title %}Mi perfil{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
-    Mostrar el formulario del perfil de acuerdo al usuario autenticado
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+    </form>
 {% endblock %}
