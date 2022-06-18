@@ -17,6 +17,11 @@ class ViewProfile(LoginRequiredMixin, View):
     def post(self, request):
         form_profile = FormProfile(request.POST, request.FILES, instance=request.user.profile)
         if form_profile.is_valid():
+            user = request.user
+            user.first_name = form_profile.cleaned_data['nombre']
+            user.last_name = form_profile.cleaned_data['apellidos']
+            user.save()
+
             form_profile.save()
             messages.success(request, f'Perfil actualizado')
             return redirect('profile')

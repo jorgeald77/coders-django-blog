@@ -10,6 +10,8 @@ class FormProfile(forms.ModelForm):
                   'rss_instagram')
         widgets = {
             'foto': forms.FileInput(),
+            'nombre': forms.TextInput(attrs={'required': True}),
+            'apellidos': forms.TextInput(attrs={'required': True}),
             'fdn': forms.DateInput(attrs={'type': 'date'}),
             'url': forms.URLInput(attrs={'type': 'url'})
         }

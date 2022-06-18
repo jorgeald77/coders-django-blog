@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -24,6 +25,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Perfil de: {self.nombre} {self.apellidos}"
+
+    def save(self):
+        super().save()
+        img = Image.open(self.foto.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.foto.path)
 
     class Meta:
         db_table = 'profiles'
