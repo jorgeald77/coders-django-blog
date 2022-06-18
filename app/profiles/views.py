@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.contrib import messages
 
 from profiles.forms import FormProfile
 
@@ -10,11 +11,12 @@ class ViewProfile(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
 
     def get(self, request):
-        # TODO Funcionalidad que muestra la info del usuario
-        #  basada en su perfil en el formulario para crear o actualizar
-        form = FormProfile()
-        return render(request, 'profile.html', {'form': form})
+        form_profile = FormProfile(instance=request.user.profile)
+        return render(request, 'profile.html', {'form': form_profile, 'has_foto': form_profile['foto'].value()})
 
     def post(self, request):
-        # TODO Funcionalidad para guardar o actualizar el registro.
-        pass
+        form_profile = FormProfile(request.POST, request.FILES, instance=request.user.profile)
+        if form_profile.is_valid():
+            form_profile.save()
+            messages.success(request, f'Perfil actualizado')
+            return redirect('profile')
