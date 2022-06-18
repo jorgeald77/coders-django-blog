@@ -1,0 +1,36 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}Mi perfil{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <section>
+        <header>
+            <div class="shadow d-flex flex-row align-items-center mb-5 position-relative"
+                 style="height:150px; background-image: url('/media/images/bg-profile.jpeg'); background-repeat: no-repeat; background-size: auto;">
+
+                <img src="/media/{{ user.profile.foto }}" alt="foto de perfil"
+                     class="img-thumbnail rounded-circle shadow mx-2"
+                     width="130" height="130"/>
+
+
+                <div class="align-self-end bg-opacity-75 bg-primary rounded mb-4">
+                    <p class="h5 px-2 text-white">{{ request.user.username }}</p>
+                </div>
+
+                <div class="position-absolute mx-2 my-2 bottom-0 end-0 bg-opacity-75 bg-primary rounded p-1">
+                    <a class="text-decoration-none text-white small" target="_blank"
+                       href="https://unsplash.com/es/fotos/IqZyFphHYbw?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink">Foto
+                        de Visax en Unsplash</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="mx-auto w-75">
+            <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-secondary">Guardar cambios</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
