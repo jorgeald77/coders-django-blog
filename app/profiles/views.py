@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib import messages
 
 from profiles.forms import FormProfile
+from profiles.models import Profile
 
 
 class ViewProfile(LoginRequiredMixin, View):
@@ -11,6 +13,11 @@ class ViewProfile(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
 
     def get(self, request):
+        try:
+            request.user.profile
+        except ObjectDoesNotExist:
+            Profile(user=request.user).save()
+
         form_profile = FormProfile(instance=request.user.profile)
         return render(request, 'profile.html', {'form': form_profile, 'has_foto': form_profile['foto'].value()})
 

@@ -3,14 +3,17 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+def user_directory_path(instance, filename):
+    return 'profiles/user_{0}/{1}'.format(instance.user.id, filename)
+
+
 class Profile(models.Model):
     SEXO = [
         (None, 'selecciona'),
         ('h', 'Hombre'),
         ('m', 'Mujer'),
     ]
-    foto = models.ImageField(upload_to='profiles', default='no-image-icon.png', null=True, blank=True,
-                             verbose_name='Foto')
+    foto = models.ImageField(upload_to=user_directory_path, default='images/no-image-icon.png', null=True, verbose_name='Foto')
     nombre = models.CharField(max_length=64, null=True, blank=True, verbose_name='Nombre(s)')
     apellidos = models.CharField(max_length=128, null=True, blank=True, verbose_name='Apellidos')
     sexo = models.CharField(max_length=1, choices=SEXO, null=True, default=None, verbose_name='Sexo')
