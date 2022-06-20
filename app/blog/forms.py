@@ -9,5 +9,5 @@ class FormSuscriber(forms.ModelForm):
         fields = ('nombre', 'email')
         widgets = {
             'nombre': forms.TextInput(attrs={'required': True}),
-            'email': forms.EmailField(attrs={'required': True})
+            'email': forms.EmailInput(attrs={'required': True}),
         }

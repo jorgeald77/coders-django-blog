@@ -1,6 +1,35 @@
 {% extends 'layouts/layout.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %} | Home{% endblock %}
+
+{% block suscriber %}
+    <div class="col-4 pt-1">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#suscribeModal">Newsletter</button>
+    </div>
+    <div class="modal fade" id="suscribeModal" tabindex="-1" aria-labelledby="suscribeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Suscríbete para recibir posts en tu correo</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form_subscriber" method="post" action="">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {{ formSuscriber|crispy }}
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnCloseModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <input type="submit" class="btn btn-primary" value="Suscribirme"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
     <!-- Último Post -->
@@ -85,4 +114,27 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const suscriberForm = document.getElementById("form_subscriber")
+
+        suscriberForm.addEventListener("submit", e => {
+            e.preventDefault()
+            formData = new FormData(suscriberForm)
+            fetch('/', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    suscriberForm.reset()
+                    document.getElementById('btnCloseModal').click()
+                })
+                .catch((error) => {
+                    console.error('Error:', error)
+                })
+        })
+    </script>
 {% endblock %}

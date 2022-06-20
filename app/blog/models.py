@@ -3,7 +3,7 @@ from django.db import models
 
 class Suscriber(models.Model):
     nombre = models.CharField(max_length=64, verbose_name='Nombre')
-    email = models.EmailField(max_length=64, verbose_name='Correo electrónico')
+    email = models.EmailField(max_length=64, unique=True, verbose_name='Correo electrónico')
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

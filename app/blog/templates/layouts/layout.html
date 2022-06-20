@@ -17,32 +17,7 @@
 <div class="container mb-5">
     <header class="blog-header lh-1 py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4 pt-1">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#suscribeModal">Suscríbete</button>
-            </div>
-            <div class="modal fade" id="suscribeModal" tabindex="-1" aria-labelledby="suscribeModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Suscríbete</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form id="form_subscribe">
-                            <div class="modal-body">
-                                <label for="email">Ingresa tu correo electrónico</label>
-                                <input type="email" name="email" required>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <input type="submit" class="btn btn-primary" value="Suscribirme"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+            {% block suscriber %}{% endblock %}
 
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-dark" href="{% url 'home' %}">Blog</a>
@@ -132,5 +107,6 @@
     </div>
 </div>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
