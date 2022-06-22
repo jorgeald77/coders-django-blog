@@ -13,7 +13,8 @@ class Profile(models.Model):
         ('h', 'Hombre'),
         ('m', 'Mujer'),
     ]
-    foto = models.ImageField(upload_to=user_directory_path, default='images/no-image-icon.png', null=True, verbose_name='Foto')
+    foto = models.ImageField(upload_to=user_directory_path, default='images/no-image-icon.png', null=True,
+                             verbose_name='Foto')
     nombre = models.CharField(max_length=64, null=True, blank=True, verbose_name='Nombre(s)')
     apellidos = models.CharField(max_length=128, null=True, blank=True, verbose_name='Apellidos')
     sexo = models.CharField(max_length=1, choices=SEXO, null=True, default=None, verbose_name='Sexo')
@@ -28,6 +29,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Perfil de: {self.nombre} {self.apellidos}"
+
+    def nombreCompleto(self):
+        return f"{self.nombre} {self.apellidos}"
 
     def save(self):
         super().save()
