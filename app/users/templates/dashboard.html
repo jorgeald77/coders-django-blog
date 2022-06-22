@@ -2,13 +2,16 @@
 
 {% block content %}
 
-    <div class="d-flex justify-content-between mb-3">
-        <!-- TODO URL para crear un nuevo Post -->
+    <div class="d-flex justify-content-between mb-4">
         <div>
             <p class="fs-3 lh-1">{{ author }}</p>
             <p class="font-xs text-light-blog">autor</p>
         </div>
-        <a href="#" class="btn btn-secondary">Crear nuevo post</a>
+
+        <!-- TODO URL para crear un nuevo Post -->
+        <div>
+            <a href="#" class="btn btn-secondary">Crear post</a>
+        </div>
     </div>
 
     {% if posts|length > 0 %}
@@ -22,11 +25,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- TODO Información de rutas para editar y Eliminar -->
                 {% for post in posts %}
                     <tr>
                         <th scope="row" style="width: 2em;">{{ forloop.counter }}.</th>
 
+                        <!-- TODO Datos del post -->
                         <td>
                             <div class="d-flex flex-column text-wrap">
                                 <p class="fw-semibold fs-6">{{ post.title }}. Lorem ipsum dolor sit amet.</p>
@@ -34,6 +37,7 @@
                             </div>
                         </td>
 
+                        <!-- TODO Información de rutas para editar y Eliminar -->
                         <td style="width: 6em;">
                             <div class="d-flex gap-2 nowrap justify-content-end">
                                 <a href="{{ post.id }}" class="btn btn-sm btn-outline-secondary small">
