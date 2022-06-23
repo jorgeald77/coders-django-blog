@@ -1,0 +1,17 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} | {% endblock %} <h1 class="blog-header-logo text-dark">Eliminar entrada de blog</h1>
+
+{% block content %}
+
+<h2>Eliminar posteo</h2>
+<p>Estas seguro que deseas eliminar el posteo {{blogpost.titulo}}?</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="btn-secondary" type="submit" value="confirmar">
+    <a class="btn-secondary" href="{% url 'viewPosts' %}" >Cancelar</a>
+</form>
+
+
+{% endblock %}

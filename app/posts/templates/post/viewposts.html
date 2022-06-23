@@ -1,0 +1,21 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} | {% endblock %} <h1 class="blog-header-logo text-dark">Agregar entrada de blog</h1>
+
+{% block content %}
+
+<br>
+<br>
+{% for post in posts %}
+
+    <li>{{post}}
+    <button>
+        <a href="{% url 'blogpostupdate' post.pk %}">Editar</a>
+    </button>
+    <button>
+        <a href="{% url 'blogpostdelete' post.pk %}">Eliminar</a>
+    </button>
+    </li>
+{% endfor %}
+
+{% endblock %}
