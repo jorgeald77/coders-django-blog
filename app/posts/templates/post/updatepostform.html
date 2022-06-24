@@ -1,0 +1,24 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} | {% endblock %} <h1 class="blog-header-logo text-dark">Modificar entrada de blog</h1>
+
+{% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>
+    <table>
+        {{ form.as_table }}
+    </table>
+    </p>
+    <p>
+
+    <input type="submit" class="btn-primary" value="Guardar Posteo" />
+
+</form>
+<button>
+    <a href="{% url 'viewPosts' %}">Cancelar</a>
+</button>
+
+
+{% endblock %}

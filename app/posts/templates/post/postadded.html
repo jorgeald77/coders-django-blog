@@ -1,0 +1,10 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} | Home{% endblock %}
+
+{% block content %}
+    Su posteo se agregó correctamente
+    <hr>
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'home' %}">Inicio</a>
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'viewPosts' %}">Ver posteos</a>
+{% endblock %}
