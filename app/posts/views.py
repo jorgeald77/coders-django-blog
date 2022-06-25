@@ -1,105 +1,59 @@
-from django.shortcuts import render
-from django.forms.models import model_to_dict
-from posts.models import BlogPost
-from posts.forms import PostForm
+from pyexpat.errors import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
+from django.views.generic import View, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from django.contrib import messages
 
-# Create your views here.
-def blogPostForm(request): #para agregar nuevos posteos
-    
-    if request.method == 'POST':
-
-        form = PostForm(request.POST)
-        
-        print(form)
-
-        if form.is_valid:
-
-            info = form.cleaned_data
-
-            blogPost = BlogPost(titulo=info['titulo'], contenido=info['contenido'], fecha=info['fecha'])
-
-            blogPost.save()
-
-            return render(request, 'post/postadded.html')
-
-    else:
-
-        form = PostForm()
-
-    return render(request, 'post/postform.html', {"form":form})
-
+from posts.forms import PostForm
+from posts.models import Post
 
 def viewPosts(request):
+    posts = Post.objects.all()
 
-    posts = BlogPost.objects.all()
-
-    context = {"posts": posts}
-
-    return render(request, "post/viewposts.html", context)
+    return render(request, "post/viewposts.html", {'posts': posts})
 
 
-def updatePosts(request, pk: int):
+class ViewCreate(LoginRequiredMixin, View):
+    login_url =  '/auth/login'      # Si el usuario no está authenticado, será redirigido a esta ruta
+    redirect_field_name = 'redirect_to'
 
-    blogpost = BlogPost.objects.get(pk=pk)
+    # Si la petición es GET entra en esta función
+    def get(self, request):
+        form = PostForm()
+        return render(request, 'post/postform.html', {"form": form})
 
-    if request.method == 'POST':
+    def post(self, request):
 
-        form = PostForm(request.POST)
-
+        form = PostForm(request.POST, request.FILES)
+        
         if form.is_valid():
 
-            info = form.cleaned_data
+            blogPost = form.save(commit=False)
+            
+            blogPost.user =  request.user
+            
+            blogPost.save()
 
-            blogpost.titulo = info['titulo']
-            blogpost.contenido = info['contenido']
-            blogpost.fecha = info['fecha']
 
-            blogpost.save()
+            messages.success(request, f'El post "{blogPost.title}", se ha guardado.')
+            
+            return redirect('viewPosts')
 
-            blogpost = BlogPost.objects.all()
-            context = {
-                'blogpost': blogpost
-            }
 
-            return render(
-                request=request,
-                context=context,
-                template_name='post/viewposts.html'
-            )
+class ViewUpdate(LoginRequiredMixin, UpdateView):
+    login_url =  '/auth/login'
+    redirect_field_name = 'redirect_to'
 
-    form = PostForm(model_to_dict(blogpost))
-    context = {
-        'blogpost':blogpost,
-        'form':form,
-    }
-    return render(
-        request=request,
-        context=context,
-        template_name='post/updatepostform.html'
-    )
+    model = Post
+    form_class = PostForm
+    template_name = 'post/updatepostform.html'
 
-def deletePosts(request, pk: int):
 
-    blogpost = BlogPost.objects.get(pk=pk)
-    if request.method == 'POST':
-        blogpost.delete()
+class ViewDelete(LoginRequiredMixin, DeleteView):
+     login_url =  '/auth/login'
+     redirect_field_name = 'redirect_to'
 
-        blogposts = BlogPost.objects.all()
-
-        context = {"blogpost":blogpost}
-
-        return render(
-            request=request,
-            context=context,
-            template_name="post/viewposts.html")
-    context = {
-        'blogpost':blogpost
-    }
-    return render(
-        request=request,
-        context=context,
-        template_name='post/postconfirmdelete.html'
-    )
-
-    #recordar trabajar en la rama dedicada para esto
+     model = Post
+     template_name = 'post/viewposts.html'
+     success_url = reverse_lazy('viewPosts')ss
