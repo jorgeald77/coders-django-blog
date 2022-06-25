@@ -1,5 +1,5 @@
 from django.urls import path
-from posts.views import ViewCreate, viewPosts, ViewUpdate, ViewDelete, ReadPost
+from posts.views import ViewCreate, viewPosts, ViewUpdate, ViewDelete, ReadPost 
 
 urlpatterns = [
     path('newpost/', ViewCreate.as_view(), name="blogPostForm"),

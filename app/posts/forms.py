@@ -5,7 +5,7 @@ from posts.models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'content', 'foto', 'published_at')
+        fields = ('title', 'subtitle', 'content', 'foto', 'published_at')
         widgets = {
             'content': forms.Textarea(attrs={'required': True}),
             'foto': forms.FileInput(),

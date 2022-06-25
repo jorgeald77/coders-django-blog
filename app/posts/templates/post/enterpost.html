@@ -5,13 +5,15 @@
 {% block content %}
 
 <h2>{{post.title}}</h2>
+<h4>{{post.subtitle}}</h4>
+<br>
 <p>{{post.content}}</p>
 <p>{{post.foto}}</p>
 <p>Creador: {{post.user}}</p>
 <br>
 <p>fecha de creación: {{post.created_at}}</p>
 <button>
-    <a href="{% url 'viewPosts' %}">Cancelar</a>
+    <a href="{% url 'viewPosts' %}">Volver</a>
 </button>
 
 
