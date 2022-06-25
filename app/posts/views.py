@@ -56,4 +56,4 @@ class ViewDelete(LoginRequiredMixin, DeleteView):
 
      model = Post
      template_name = 'post/viewposts.html'
-     success_url = reverse_lazy('viewPosts')ss
+     success_url = reverse_lazy('viewPosts')
