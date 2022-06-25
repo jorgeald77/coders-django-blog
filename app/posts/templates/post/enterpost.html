@@ -1,0 +1,18 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} | {% endblock %} <h1 class="blog-header-logo text-dark">Ver entrada de blog</h1>
+
+{% block content %}
+
+<h2>{{post.title}}</h2>
+<p>{{post.content}}</p>
+<p>{{post.foto}}</p>
+<p>Creador: {{post.user}}</p>
+<br>
+<p>fecha de creación: {{post.created_at}}</p>
+<button>
+    <a href="{% url 'viewPosts' %}">Cancelar</a>
+</button>
+
+
+{% endblock %}

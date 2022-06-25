@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import View, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib import messages
-
+from django.views.generic.detail import DetailView
 from posts.forms import PostForm
 from posts.models import Post
 
@@ -13,12 +13,19 @@ def viewPosts(request):
 
     return render(request, "post/viewposts.html", {'posts': posts})
 
+# def ReadPost(DetailView):
+#     model = Post
+
+#     template_name = "post/enterpost.html"
+
+class ReadPost(DetailView):
+    model = Post
+    template_name = 'post/enterpost.html'
 
 class ViewCreate(LoginRequiredMixin, View):
-    login_url =  '/auth/login'      # Si el usuario no está authenticado, será redirigido a esta ruta
+    login_url =  '/auth/login'
     redirect_field_name = 'redirect_to'
 
-    # Si la petición es GET entra en esta función
     def get(self, request):
         form = PostForm()
         return render(request, 'post/postform.html', {"form": form})

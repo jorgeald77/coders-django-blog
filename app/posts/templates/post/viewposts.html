@@ -8,7 +8,7 @@
 <br>
 {% for post in posts %}
 
-    <li>{{post}}
+    <li><a href="{% url 'ReadPost' post.pk%}">{{post}}</a>
     <button>
         <a href="{% url 'blogpostupdate' post.pk %}">Editar</a>
     </button>
