@@ -12,6 +12,24 @@
 <p>Creador: {{post.user}}</p>
 <br>
 <p>fecha de creación: {{post.created_at}}</p>
+<hr/>
+
+<h3>Comentarios</h3>
+
+{% if not post.comments.all %}
+    Todavía no hay comentarios...<a href="#">Crear comentario</a>
+{% else %}
+    {% for comment in post.comments.all %}
+        <strong>
+        {{comment.person_name }} - creado: {{ comment.created_at }}
+        </strong>
+        <br/>
+        {{ comment.content }}
+    {% endfor %}
+
+{% endif %}
+
+<hr/>
 <button>
     <a href="{% url 'viewPosts' %}">Volver</a>
 </button>

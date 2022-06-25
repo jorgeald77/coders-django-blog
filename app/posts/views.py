@@ -12,11 +12,7 @@ def viewPosts(request):
     posts = Post.objects.all()
 
     return render(request, "post/viewposts.html", {'posts': posts})
-
-# def ReadPost(DetailView):
-#     model = Post
-
-#     template_name = "post/enterpost.html"
+    
 
 class ReadPost(DetailView):
     model = Post
