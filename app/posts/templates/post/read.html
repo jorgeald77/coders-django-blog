@@ -1,5 +1,6 @@
 {% extends 'layouts/layout.html' %}
 {% block title %}| Leyendo Post{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
     <h2>{{ post.title }}</h2>
     <p>{{ post.content|safe }}</p>
@@ -7,4 +8,37 @@
     <p>Creador: {{ post.user }}</p>
     <br>
     <p>{{ post.published_at }}</p>
+
+    <section class="my-5">
+        <h5>Comentarios</h5>
+
+        <div class="list-group my-4">
+            {% for comment in post.comments.all %}
+                <div class="list-group-item list-group-item-action">
+                    <p class="mb-1">{{ comment.content }}</p>
+                    <small class="text-secondary">{{ comment.person_name }}</small>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="accordion" id="accordionForm">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Comentar este
+                        post
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                     data-bs-parent="#accordionForm">
+                    <div class="accordion-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
