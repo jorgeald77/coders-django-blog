@@ -15,7 +15,6 @@ def viewPosts(request):
     return render(request, "post/list.html", {'posts': posts})
 
 
-# TODO Hacer uso de MessageMixin
 class ViewCreate(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
