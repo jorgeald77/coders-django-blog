@@ -63,10 +63,10 @@ class ViewDelete(LoginRequiredMixin, DeleteView):
 
 class AddCommentView(CreateView):
     model = Comment
-    #form_class = CommentForm
+    form_class = CommentForm
     template_name = 'post/addcomment.html'
-    fields = '__all__'
-    # def valid_form(self, form):
-    #     form.instance.post_id = self.kwargs['pk']
-    #     return super().valid_form(form)
+    #fields = '__all__'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
     success_url = reverse_lazy('viewPosts')
