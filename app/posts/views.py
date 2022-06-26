@@ -1,12 +1,14 @@
 from pyexpat.errors import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.forms import model_to_dict
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import View, DetailView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
-from posts.forms import PostForm
+from posts.forms import PostForm, CommentForm
 from posts.models import Post
 
 
@@ -18,6 +20,23 @@ def viewPosts(request):
 class ViewRead(DetailView):
     model = Post
     template_name = 'post/read.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ViewRead, self).get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
+
+
+def addComment(request):
+    if request.method == 'POST':
+        formComment = CommentForm(request.POST)
+        if formComment.is_valid():
+            instance = formComment.save(commit=False)
+            instance.post_id = int(request.POST.get('post'))
+            instance.save()
+            return JsonResponse(model_to_dict(instance, fields=['person_name']), status=201)
+        else:
+            return JsonResponse(formComment.errors, safe=False, status=200)
 
 
 class ViewCreate(LoginRequiredMixin, View):
