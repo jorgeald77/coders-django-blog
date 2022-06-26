@@ -1,18 +1,18 @@
 from pyexpat.errors import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
-from django.views.generic import View, UpdateView, DeleteView
+from django.views.generic import View, UpdateView, DeleteView, CreateView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.generic.detail import DetailView
-from posts.forms import PostForm
-from posts.models import Post
+from posts.forms import PostForm, CommentForm
+from posts.models import Post, Comment
 
 def viewPosts(request):
     posts = Post.objects.all()
 
     return render(request, "post/viewposts.html", {'posts': posts})
-    
+
 
 class ReadPost(DetailView):
     model = Post
@@ -60,3 +60,13 @@ class ViewDelete(LoginRequiredMixin, DeleteView):
      model = Post
      template_name = 'post/viewposts.html'
      success_url = reverse_lazy('viewPosts')
+
+class AddCommentView(CreateView):
+    model = Comment
+    #form_class = CommentForm
+    template_name = 'post/addcomment.html'
+    fields = '__all__'
+    # def valid_form(self, form):
+    #     form.instance.post_id = self.kwargs['pk']
+    #     return super().valid_form(form)
+    success_url = reverse_lazy('viewPosts')

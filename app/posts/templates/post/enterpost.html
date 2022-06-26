@@ -15,9 +15,9 @@
 <hr/>
 
 <h3>Comentarios</h3>
-
+<br>
 {% if not post.comments.all %}
-    Todavía no hay comentarios...<a href="#">Crear comentario</a>
+    Todavía no hay comentarios... <a href="{% url 'AddComment' post.pk %}">Crear comentario</a>
 {% else %}
     {% for comment in post.comments.all %}
         <strong>
@@ -25,8 +25,9 @@
         </strong>
         <br/>
         {{ comment.content }}
+        <br><br>
     {% endfor %}
-
+    <a href="{% url 'AddComment' post.pk %}">Crear comentario</a>
 {% endif %}
 
 <hr/>

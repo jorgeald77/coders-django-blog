@@ -30,12 +30,10 @@ class Post(models.Model):
         ordering = ['created_at']
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    person_name = models.CharField(max_length=16) #verbose_name='Titulo-com'
-#     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posteos')
-    content = models.TextField(max_length=1600) #verbose_name='Contenido-com'
-    created_at = models.DateTimeField(auto_now_add=True) #verbose_name='Fecha de creación-com'
-#     class Meta:
-#         ordering = ['created_at']
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    person_name = models.CharField(max_length=255) #verbose_name='Titulo-com' (está comentado por si se necesita luego) 16
+    content = models.TextField(max_length=1600) #verbose_name='Contenido-com' (está comentado por si se necesita luego)
+    created_at = models.DateTimeField(auto_now_add=True) #verbose_name='Fecha de creación-com' (está comentado por si se necesita luego)
+
     def __str__(self):
         return f'Comentario: {self.content} -- Autor:{self.person_name}'

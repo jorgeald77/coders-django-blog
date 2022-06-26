@@ -1,0 +1,18 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %} | {% endblock %} <h1 class="blog-header-logo text-dark">Agregar comentarios a la publicación</h1>
+
+{% block content %}
+
+
+    <h2>Agregar comentario</h2>
+    <br><br>
+
+    <div class="form-group">
+<form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Agregar comentario</button>
+    </div>
+
+{% endblock %}
