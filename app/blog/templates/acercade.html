@@ -1,49 +1,39 @@
 {% extends 'layouts/layout.html' %}
-{% block title %}| Acerca de... {% endblock %}
+{% block title %}| Acerca de...{% endblock %}
 
 {% block content %}
-    <h1>Acerca de</h1>
-
-    <div>
-        <p>Este blog fue creado por <strong>Jorge Guzmán Aguilar y Juan Almazán</strong>, dos programadores
-            de diferentes países que trabajaron juntos para desarrollarlo.
-            A continuación, encontrarás información más detallada sobre cada uno</p>
+    <div class="px-5 py-2 mb-4 bg-light rounded-3">
+        <div class="container-fluid">
+            <h1 class="display-5 fw-bold">Acerca de los creadores...</h1>
+            <p class="col-md-10 fs-5">Este blog fue desarrollado por <strong>Jorge Guzmán</strong> y <strong>Juan
+                Almazán</strong>, programadores de México y Argentina; trabajamos en colaboración bajo el marco de
+                trabajo ágil denominado <strong>"Scrum"</strong> con la herramienta colaborativa <strong>Trello</strong>
+                para organizar las tareas en tarjetas y sprint de las semanas de trabajo y junto con <strong>Github</strong>
+                para compartir el código.
+            </p>
+        </div>
     </div>
 
-    <div>
-        <div>
-            <h4 style="margin-left: 50px;display:inline;float:left">Jorge Guzmán Aguilar</h4>
-            <h4 style="margin-right: 50px;display:inline;float:right">Juan Almazán</h4>
+    <div class="row align-items-md-stretch mb-5">
+        <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <img src="/media/images/jorge.png"
+                     alt="foto jorge" class="img-thumbnail rounded-circle" width="300" height="300">
+                <h2 class="my-3">Jorge Guzmán</h2>
+                <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look.
+                    Then, mix and match with additional component themes and more.</p>
+            </div>
         </div>
 
-        <div>
-            <img style="margin-left: 50px;display:inline;float:left" width="260" height="395"
-                 src="https://images.unsplash.com/photo-1655487420177-54b4d969c5a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80"
-                 alt="imagen de Jorge">
-            <img style="margin-right: 50px;display:inline;float:right" width="260" height="395"
-                 src="https://images.unsplash.com/photo-1653908093988-5149d9159742?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                 alt="imagen de Juan">
-
-        </div>
-
-
-        <div>
-            <p style="margin-right: auto;display:inline;float:left">Jorge Guzmán Aguilar Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Aliquam maximus turpis eu ligula posuere varius. Vestibulum ornare
-                neque sed facilisis tincidunt. Pellentesque interdum fringilla arcu et lobortis. Morbi dignissim
-                lacus et elit tincidunt pretium. Integer pharetra, arcu ut pulvinar pharetra, est enim dignissim
-                lorem, sed tristique massa mi vitae justo. Suspendisse mi dolor, iaculis eget risus ac, viverra
-                accumsan quam. Morbi convallis in ante nec ultrices. Proin ante sem, ultricies sed commodo ac,
-                viverra eget neque. Proin tincidunt gravida tortor, eu commodo ipsum. Curabitur ultricies elementum
-                laoreet. Suspendisse dictum mauris rutrum quam semper, in commodo odio hendrerit.</p>
-            <p style="margin-left: auto;display:inline;float:right">Juan Almazán Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Aliquam maximus turpis eu ligula posuere varius. Vestibulum ornare
-                neque sed facilisis tincidunt. Pellentesque interdum fringilla arcu et lobortis. Morbi dignissim
-                lacus et elit tincidunt pretium. Integer pharetra, arcu ut pulvinar pharetra, est enim dignissim
-                lorem, sed tristique massa mi vitae justo. Suspendisse mi dolor, iaculis eget risus ac, viverra
-                accumsan quam. Morbi convallis in ante nec ultrices. Proin ante sem, ultricies sed commodo ac,
-                viverra eget neque. Proin tincidunt gravida tortor, eu commodo ipsum. Curabitur ultricies elementum
-                laoreet. Suspendisse dictum mauris rutrum quam semper, in commodo odio hendrerit.</p>
+        <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark border rounded-3">
+                <img src="https://images.unsplash.com/photo-1653908093988-5149d9159742?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                     alt="foto juan" class="img-thumbnail rounded-circle" width="300" height="300">
+                <h2 class="my-3">Juan Almazán</h2>
+                <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be
+                    sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of
+                    both column's content for equal-height.</p>
+            </div>
         </div>
     </div>
 {% endblock %}
