@@ -31,8 +31,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
-    person_name = models.CharField(max_length=255) #verbose_name='Titulo-com' (está comentado por si se necesita luego) 16
-    content = models.TextField(max_length=1600) #verbose_name='Contenido-com' (está comentado por si se necesita luego)
+    person_name = models.CharField(max_length=16, verbose_name='Tu nombre:') #verbose_name='Titulo-com' (está comentado por si se necesita luego) 16
+    content = models.TextField(max_length=1600, verbose_name='Contenido') #verbose_name='Contenido-com' (está comentado por si se necesita luego)
     created_at = models.DateTimeField(auto_now_add=True) #verbose_name='Fecha de creación-com' (está comentado por si se necesita luego)
 
     def __str__(self):
