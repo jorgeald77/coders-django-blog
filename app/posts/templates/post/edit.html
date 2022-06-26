@@ -8,6 +8,7 @@
         <form method="POST">
             {% csrf_token %}
             <div class="d-flex flex-column gap-3">
+                {{ form.media }}
                 {{ form|crispy }}
             </div>
             <div class="my-4 d-flex gap-2 justify-content-end">
