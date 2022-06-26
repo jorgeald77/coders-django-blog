@@ -9,8 +9,11 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import environ
+
 import os
+import environ
+import dj_database_url
+import django_heroku
 from pathlib import Path
 from django.contrib.messages import constants as message_constants
 
@@ -45,8 +48,8 @@ INSTALLED_APPS = [
 
     # Paquetes del proyecto
     'crispy_forms',
-    'django_seed',
     'ckeditor',
+    'django_seed',
 
     # Apps del proyecto
     'authentication',
@@ -117,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'es-ES'
+LANGUAGE_CODE = 'en-EN'
 
 TIME_ZONE = 'UTC'
 
@@ -129,6 +132,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'statics')
 ]
@@ -142,6 +146,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Template forms Bootstrap 4
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 # Clases para los mensajes flash de Bootstrap
 MESSAGE_TAGS = {
     message_constants.DEBUG: 'debug',
@@ -150,3 +155,9 @@ MESSAGE_TAGS = {
     message_constants.WARNING: 'warning',
     message_constants.ERROR: 'danger',
 }
+
+# HEROKU config
+django_heroku.settings(locals())
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

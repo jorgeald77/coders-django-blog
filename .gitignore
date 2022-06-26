@@ -130,3 +130,4 @@ dmypy.json
 
 # Profile pics
 app/media/profiles/
+app/media/posts/
