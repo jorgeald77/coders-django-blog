@@ -28,3 +28,7 @@ def index(request):
         'formSuscriber': formSuscriber,
         'page_obj': page_obj
     })
+
+
+def about(request):
+    return render(request, 'acercade.html')
