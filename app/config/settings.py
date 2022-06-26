@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # Paquetes del proyecto
     'crispy_forms',
+    'django_seed',
 
     # Apps del proyecto
     'authentication',

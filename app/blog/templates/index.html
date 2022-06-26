@@ -11,21 +11,26 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Suscríbete para recibir posts en tu correo</h4>
+                    <h4 class="modal-title">Quiero recibir el newsletter</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form_subscriber" method="post" action="">
-                    <div class="modal-body">
-                        {% csrf_token %}
-                        {{ formSuscriber|crispy }}
+                <div class="modal-body">
+                    <div class="w-75 mx-auto">
+                        <form id="form_subscriber" method="post">
+                            {% csrf_token %}
+                            <div class="d-flex flex-column gap-3">
+                                {{ formSuscriber|crispy }}
+                            </div>
+
+                            <div class="my-3 d-flex gap-2 justify-content-end">
+                                <button id="btnCloseModal" type="button" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Cerrar
+                                </button>
+                                <input type="submit" class="btn btn-dark" value="Suscribirme"/>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button id="btnCloseModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cerrar
-                        </button>
-                        <input type="submit" class="btn btn-primary" value="Suscribirme"/>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
