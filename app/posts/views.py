@@ -2,7 +2,7 @@ from pyexpat.errors import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.views.generic import View, UpdateView, DeleteView
+from django.views.generic import View, DetailView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -13,6 +13,11 @@ from posts.models import Post
 def viewPosts(request):
     posts = Post.objects.all()
     return render(request, "post/list.html", {'posts': posts})
+
+
+class ViewRead(DetailView):
+    model = Post
+    template_name = 'post/read.html'
 
 
 class ViewCreate(LoginRequiredMixin, View):
