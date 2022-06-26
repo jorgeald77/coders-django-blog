@@ -1,6 +1,7 @@
 from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 def user_directory_path(instance, filename):
@@ -19,7 +20,7 @@ class Profile(models.Model):
     apellidos = models.CharField(max_length=128, null=True, blank=True, verbose_name='Apellidos')
     sexo = models.CharField(max_length=1, choices=SEXO, null=True, default=None, verbose_name='Sexo')
     fdn = models.DateField(null=True, blank=True, verbose_name='Fecha de nacimiento')
-    descripcion = models.TextField(null=True, blank=True, verbose_name='Descripción')
+    descripcion = RichTextField(null=True, blank=True, verbose_name='Bio')
     url = models.URLField(null=True, blank=True, verbose_name='Sitio web')
     rss_facebook = models.CharField(max_length=32, null=True, blank=True, verbose_name='Facebook')
     rss_twitter = models.CharField(max_length=32, null=True, blank=True, verbose_name='Twitter')
