@@ -1,8 +1,7 @@
 {% extends 'layouts/layout.html' %}
-{% block title %}Mi perfil{% endblock %}
+{% block title %}| Mi perfil{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-
     <section>
         <header>
             <div class="shadow d-flex flex-row align-items-center mb-5 position-relative"
@@ -25,11 +24,16 @@
             </div>
         </header>
 
-        <div class="mx-auto w-75">
+        <div class="p-4 my-4 shadow rounded mx-auto">
             <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-secondary">Guardar cambios</button>
+                <div class="d-flex flex-column gap-3">
+                    {{ form.media }}
+                    {{ form|crispy }}
+                </div>
+                <div class="my-4 d-flex gap-2 justify-content-end">
+                    <button type="submit" class="btn btn-dark">Guardar cambios</button>
+                </div>
             </form>
         </div>
     </section>

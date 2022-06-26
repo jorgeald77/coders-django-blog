@@ -1,0 +1,20 @@
+{% extends 'layouts/layout.html' %}
+{% block title %} | Editar Post{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Modificar Post</h2>
+
+    <div class="p-4 my-4 shadow rounded mx-auto">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="d-flex flex-column gap-3">
+                {{ form.media }}
+                {{ form|crispy }}
+            </div>
+            <div class="my-4 d-flex gap-2 justify-content-end">
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancelar</a>
+                <input type="submit" value="Actualizar" class="btn btn-dark"/>
+            </div>
+        </form>
+    </div>
+{% endblock %}
