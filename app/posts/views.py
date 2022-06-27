@@ -72,15 +72,14 @@ class ViewUpdate(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, U
         return self.request.user == post.user
 
 
-class ViewDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class DeletePost(LoginRequiredMixin, View):
     login_url = '/auth/login'
     redirect_field_name = 'redirect_to'
 
-    model = Post
-    template_name = 'post/delete.html'
-    success_message = 'Post eliminado!!!'
-    success_url = reverse_lazy('viewPosts')
-
-    def test_func(self):
-        post = self.get_object()
-        return self.request.user == post.user
+    def post(self, request):
+        post = Post.objects.get(pk=request.POST.get('post_id'))
+        if post.user_id == request.user.id:
+            post.delete()
+            return JsonResponse({'delete': 'ok'}, status=201)
+        else:
+            return JsonResponse({}, safe=False, status=200)
