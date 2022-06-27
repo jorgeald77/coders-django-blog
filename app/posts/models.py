@@ -1,3 +1,4 @@
+from PIL import Image
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.contrib.auth.models import User
@@ -17,6 +18,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('viewPosts')
+
+    def save(self):
+        super().save()
+        img = Image.open(self.foto.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.foto.path)
 
     class Meta:
         db_table = 'posts'
