@@ -104,7 +104,7 @@
                         <h2 class="blog-post-title mb-1">{{ post.title }}</h2>
                         <p class="blog-post-meta">{{ post.published_at }} <span>{{ post.user.profile.nombre }}</span>
                         </p>
-                        {{ post.content }}
+                        <p style="overflow: hidden; width: 90%;  height: 100px; text-overflow: ellipsis;">{{ post.content|striptags|safe }}</p>
                         <div class="mt-3">
                             <a href="{% url 'blogpostread' post.pk %}">Continuar leyendo...</a>
                         </div>

@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.forms import model_to_dict
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from blog.forms import FormSuscriber
 from posts.models import Post
@@ -32,3 +32,11 @@ def index(request):
 
 def about(request):
     return render(request, 'acercade.html')
+
+
+def buscar(request):
+    if request.method == 'POST':
+        posts = Post.objects.filter(content__contains=request.POST.get('filtro'))
+        return render(request, 'busqueda.html', {'posts': posts})
+
+    return redirect('home')
